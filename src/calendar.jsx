@@ -12,7 +12,7 @@ class Calendar extends React.Component {
     let day = date.getDay();
     let year = date.getFullYear();
 
-    this.setState({month: month, day: day, year, year});
+    this.setState({month: month, day: day, year: year});
   }
 
   parseMonth(num) {
@@ -22,15 +22,21 @@ class Calendar extends React.Component {
     return monthNames[num];
   }
 
+  parseWeek() {
+    let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+    return <span>{dayNames.join(" ")}</span>
+  }
+
   render() {
     const monthName = this.parseMonth(this.state.month)
+    const weekNames = this.parseWeek();
     return (
       <div className="calendar">
         <div className="calendar-header">
           <span>{monthName} {this.state.year}</span>
         </div>
         <div className="calendar-week">
-
+          {weekNames}
         </div>
         <div className="calendar-days">
 
