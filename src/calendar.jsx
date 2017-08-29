@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './calendar.css'
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,19 @@ class Calendar extends React.Component {
 
   render() {
     const monthName = this.parseMonth(this.state.month)
-    return <p>{monthName} {this.state.day} {this.state.year}</p>
+    return (
+      <div className="calendar">
+        <div className="calendar-header">
+          <span>{monthName} {this.state.year}</span>
+        </div>
+        <div className="calendar-week">
+
+        </div>
+        <div className="calendar-days">
+
+        </div>
+      </div>
+    )
   }
 }
 
