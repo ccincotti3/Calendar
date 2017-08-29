@@ -10,11 +10,21 @@ class Calendar extends React.Component {
     let date = new Date();
     let month = date.getMonth();
     let day = date.getDay();
-    let year = date.getYear();
+    let year = date.getFullYear();
+
+    this.setState({month: month, day: day, year, year});
+  }
+
+  parseMonth(num) {
+    let monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    return monthNames[num];
   }
 
   render() {
-    return <p>"Calendar"</p>
+    const monthName = this.parseMonth(this.state.month)
+    return <p>{monthName} {this.state.day} {this.state.year}</p>
   }
 }
 
