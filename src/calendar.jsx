@@ -65,8 +65,10 @@ class Calendar extends React.Component {
       }
       weeks.push(thisWeek);
     }
-
-    return weeks;
+    const mapWeeks = weeks.map((arr, i) => {
+      return <Week days={arr} key={i} />
+    });
+    return mapWeeks;
   }
 
   render() {
@@ -81,9 +83,9 @@ class Calendar extends React.Component {
         <div className="calendar-week">
           {weekNames}
         </div>
-        <div className="calendar-days">
+        <table className="calendar-days" align="center">
           {days}
-        </div>
+        </table>
       </div>
     )
   }
@@ -93,7 +95,20 @@ class Week extends React.Component {
   constructor(props) {
     super(props);
   }
-  //get start day, get # of days,
+  render() {
+    const dayBox = this.props.days.map((day, i) => {
+      return (
+          <td className="box" key={i}>
+            {day}
+          </td>
+    )
+    });
+    return (
+      <tr>
+        {dayBox}
+      </tr>
+    )
+  }
 }
 
 export default Calendar;
