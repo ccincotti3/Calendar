@@ -8,6 +8,12 @@
   box-sizing: border-box;
 }
 
+.box:hover {
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+}
+
 .calendar-days {
   margin: 0 auto;
 }
