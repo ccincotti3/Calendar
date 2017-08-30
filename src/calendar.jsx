@@ -25,7 +25,9 @@ class Calendar extends React.Component {
 
   parseWeek() {
     let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-    return <span>{dayNames.join(" ")}</span>
+    return dayNames.map((dayName, i) => {
+      return <span className='day-name' key={i}>{dayName}</span>;
+    })
   }
 
   populateCalendar(month, year) {
@@ -37,7 +39,7 @@ class Calendar extends React.Component {
     let weeks = [];
     let firstWeek = [];
     let day = 1;
-
+    weeks.push(this.parseWeek())
     for (var i = 0; i < 7; i++) {
       if(i < firstDay) {
         firstWeek[i] = startLastMonth;
@@ -73,18 +75,16 @@ class Calendar extends React.Component {
 
   render() {
     const monthName = this.parseMonth(this.state.month)
-    const weekNames = this.parseWeek();
     const days = this.populateCalendar(this.state.month, this.state.year);
     return (
       <div className="calendar">
         <div className="calendar-header">
           <span>{monthName} {this.state.year}</span>
         </div>
-        <div className="calendar-week">
-          {weekNames}
-        </div>
-        <table className="calendar-days" align="center">
-          {days}
+        <table className="calendar-days">
+          <tbody>
+            {days}
+          </tbody>
         </table>
       </div>
     )
