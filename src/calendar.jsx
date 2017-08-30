@@ -28,17 +28,25 @@ class Calendar extends React.Component {
     return <span>{dayNames.join(" ")}</span>
   }
 
-  populateCalendar() {
-    let daysOfMonth = new Date(this.state.year, this.state.month, 0).getDate();
-    let firstDay = new Date(this.state.year, this.state.month, 1).getDay();
+  populateCalendar(month, year) {
+    let daysOfMonth = new Date(year, month + 1, 0).getDate(); // have to add one
+    let firstDay = new Date(year, month, 1).getDay();
+    let daysOfLastMonth = new Date(year, month, 0).getDate();
+    let startLastMonth = daysOfLastMonth - firstDay + 1;
 
     let weeks = [];
     let firstWeek = [];
     let day = 1;
 
-    for (var i = firstDay; i < 7; i++) {
-      firstWeek[i] = day;
-      day++;
+    for (var i = 0; i < 7; i++) {
+      if(i < firstDay) {
+        firstWeek[i] = startLastMonth;
+        startLastMonth++;
+      }
+      else {
+        firstWeek[i] = day;
+        day++;
+      }
     }
     weeks.push(firstWeek);
 
@@ -64,7 +72,7 @@ class Calendar extends React.Component {
   render() {
     const monthName = this.parseMonth(this.state.month)
     const weekNames = this.parseWeek();
-    console.log(this.populateCalendar());
+    const days = this.populateCalendar(this.state.month, this.state.year);
     return (
       <div className="calendar">
         <div className="calendar-header">
@@ -74,7 +82,7 @@ class Calendar extends React.Component {
           {weekNames}
         </div>
         <div className="calendar-days">
-          {this.state.day}
+          {days}
         </div>
       </div>
     )
