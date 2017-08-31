@@ -5,6 +5,7 @@ class Calendar extends React.Component {
     super(props);
     this.state = {dateObj: null, month: null, day: null, year: null}
     this.populateCalendar = this.populateCalendar.bind(this);
+    this.changeDir = this.changeDir.bind(this);
   }
 
   componentDidMount() {
@@ -72,13 +73,26 @@ class Calendar extends React.Component {
     return mapWeeks;
   }
 
+  changeDir(dir) {
+    if(dir === 'left') {
+      this.setState({month: this.state.month - 1});
+    } else {
+      this.setState({month: this.state.month + 1});
+    }
+    return;
+  }
+
   render() {
     const monthName = this.parseMonth(this.state.month)
     const days = this.populateCalendar(this.state.month, this.state.year);
     return (
       <div className="calendar">
         <div className="calendar-header">
-          <span>{monthName} {this.state.year}</span>
+          <span>
+            <button onClick={() => this.changeDir('left')}>Left</button>
+            {monthName} {this.state.year}
+            <button onClick={() => this.changeDir('right')}>Right</button>
+          </span>
         </div>
         <table className="calendar-days">
           <tr>{this.parseWeek()}</tr>
