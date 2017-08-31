@@ -75,9 +75,9 @@ class Calendar extends React.Component {
 
   changeDir(dir) {
     if(dir === 'left') {
-      this.setState({month: this.state.month - 1});
+      this.setState({month: (this.state.month - 1) % 12});
     } else {
-      this.setState({month: this.state.month + 1});
+      this.setState({month: (this.state.month + 1) % 12});
     }
     return;
   }
